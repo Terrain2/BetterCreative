@@ -1,11 +1,11 @@
 {
     "name": "BetterCreative",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "website_url": "https://github.com/Terrain2/BetterCreative",
     "description": "Actually adds a fucking creative mode.",
     "dependencies": [
         "Terrain-OffroadPackets-1.0.0",
-        "Terrain-SettingsApi-1.1.0",
+        "Terrain-SettingsApi-1.1.1",
         "Terrain-CommonFly-1.0.0"
     ]
 }

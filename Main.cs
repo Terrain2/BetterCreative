@@ -2,9 +2,11 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Terrain.Packets;
 using UnityEngine;
 
@@ -58,8 +60,20 @@ namespace BetterCreative
             harmony.PatchAll(assembly);
         }
 
+        static readonly OSPlatform[] supportedPlatforms = new[] { OSPlatform.Windows, OSPlatform.Linux, OSPlatform.OSX };
+
         static AssetBundle GetAssetBundle(string name)
         {
+            foreach (var platform in supportedPlatforms) {
+                if (RuntimeInformation.IsOSPlatform(platform)) {
+                    name = $"{name}-{platform.ToString().ToLower()}";
+                    goto load;
+                }
+            }
+
+            throw new PlatformNotSupportedException("Unsupported platform, cannot load AssetBundles");
+
+            load:
             var execAssembly = Assembly.GetExecutingAssembly();
 
             var resourceName = execAssembly.GetManifestResourceNames().Single(str => str.EndsWith(name));
