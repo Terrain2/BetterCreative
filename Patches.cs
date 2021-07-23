@@ -264,4 +264,27 @@ namespace BetterCreative
         [HarmonyPatch(nameof(PlayerStatus.DealDamage)), HarmonyPrefix]
         static bool DealDamage(PlayerStatus __instance) => !__instance.invincible;
     }
+    
+    [HarmonyPatch(typeof(RepairInteract))]
+    class RepairInteractPatches
+    {
+        [HarmonyPatch(nameof(RepairInteract.Interact)), HarmonyPrefix]
+        static bool Interact(RepairInteract __instance)
+        {
+            if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
+            {
+                ClientSend.Interact(__instance.id);
+            } 
+            return true;
+        }
+        [HarmonyPatch(nameof(RepairInteract.LocalExecute)), HarmonyPrefix]
+        static bool Local(RepairInteract __instance)
+        {
+            if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
 }
