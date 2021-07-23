@@ -274,6 +274,7 @@ namespace BetterCreative
             if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
             {
                 ClientSend.Interact(__instance.id);
+                return false;
             } 
             return true;
         }
