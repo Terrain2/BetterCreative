@@ -1,12 +1,12 @@
-using BepInEx;
-using BepInEx.Configuration;
-using BepInEx.Logging;
-using HarmonyLib;
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using BepInEx;
+using BepInEx.Configuration;
+using BepInEx.Logging;
+using HarmonyLib;
 using Terrain.Packets;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace BetterCreative
             Name = "BetterCreative",
             Author = "Terrain",
             Guid = Author + "." + Name,
-            Version = "1.0.0.0";
+            Version = "1.1.0.0";
 
         internal readonly ManualLogSource log;
         internal readonly Harmony harmony;
@@ -64,8 +64,10 @@ namespace BetterCreative
 
         static AssetBundle GetAssetBundle(string name)
         {
-            foreach (var platform in supportedPlatforms) {
-                if (RuntimeInformation.IsOSPlatform(platform)) {
+            foreach (var platform in supportedPlatforms)
+            {
+                if (RuntimeInformation.IsOSPlatform(platform))
+                {
                     name = $"{name}-{platform.ToString().ToLower()}";
                     goto load;
                 }
@@ -73,7 +75,7 @@ namespace BetterCreative
 
             throw new PlatformNotSupportedException("Unsupported platform, cannot load AssetBundles");
 
-            load:
+        load:
             var execAssembly = Assembly.GetExecutingAssembly();
 
             var resourceName = execAssembly.GetManifestResourceNames().Single(str => str.EndsWith(name));
