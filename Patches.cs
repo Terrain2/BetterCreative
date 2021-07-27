@@ -256,12 +256,41 @@ namespace BetterCreative
         [HarmonyPatch(nameof(PlayerStatus.Awake)), HarmonyPostfix]
         static void Awake(PlayerStatus __instance)
         {
-            __instance.invincible = true;
-            __instance.maxStamina = 100f;
-            __instance.maxHunger = 100f;
+            if (GameManager.gameSettings.gameMode != GameSettings.GameMode.Creative) 
+            {
+                __instance.invincible = true;
+                __instance.maxStamina = 100f;
+                __instance.maxHunger = 100f;
+            }
         }
 
         [HarmonyPatch(nameof(PlayerStatus.DealDamage)), HarmonyPrefix]
         static bool DealDamage(PlayerStatus __instance) => !__instance.invincible;
+    }
+    
+    
+    [HarmonyPatch(typeof(InventoryUI))]
+    class InventoryUIPatches
+    {
+        [HarmonyPatch(nameof(InventoryUI.CanRepair)), HarmonyPrefix]
+        static bool CanRepair(InventoryUI __instance, ref bool __result)
+        {
+            if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
+            {
+                __result = true;
+                return false;
+            }
+            return true;
+        }
+        [HarmonyPatch(nameof(InventoryUI.Repair)), HarmonyPrefix]
+        static bool Repair(InventoryUI __instance, ref bool __result)
+        {
+            if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
+            {
+                __result = true;
+                return false;
+            }
+            return true;
+        }
     }
 }
