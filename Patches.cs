@@ -256,7 +256,7 @@ namespace BetterCreative
         [HarmonyPatch(nameof(PlayerStatus.Awake)), HarmonyPostfix]
         static void Awake(PlayerStatus __instance)
         {
-            if (GameManager.gameSettings.gameMode != GameSettings.GameMode.Creative)
+            if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
             {
                 __instance.invincible = true;
                 __instance.maxStamina = 100f;
