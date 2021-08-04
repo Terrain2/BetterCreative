@@ -19,7 +19,7 @@ namespace BetterCreative
             Name = "BetterCreative",
             Author = "Terrain",
             Guid = Author + "." + Name,
-            Version = "1.1.0.0";
+            Version = "1.2.0.0";
 
         internal readonly ManualLogSource log;
         internal readonly Harmony harmony;
@@ -46,7 +46,7 @@ namespace BetterCreative
             assembly = Assembly.GetExecutingAssembly();
             modFolder = Path.GetDirectoryName(assembly.Location);
             savefile = Path.Combine(modFolder, "binds");
-            packets = OffroadPackets.Register<Packets>();
+            packets = OffroadPackets.Create<Packets>();
 
             var bundle = GetAssetBundle("creative");
 
@@ -106,10 +106,9 @@ namespace BetterCreative
 
         public static void DontDestroyNeighbors(bool value)
         {
-            using (Main.packets.WriteToAll(nameof(DontDestroyNeighbors), out var writer))
-            {
-                writer.Write(value);
-            }
+            using var packet = Main.packets.WriteToAll(nameof(DontDestroyNeighbors));
+            packet.Write(value);
+            packet.Send();
         }
     }
 }

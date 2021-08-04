@@ -10,6 +10,7 @@
     <RootNamespace>BetterCreative</RootNamespace>
     <AssemblyName>BetterCreative</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <LangVersion>preview</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -46,6 +47,10 @@
     </Reference>
     <Reference Include="Mono.Security">
       <HintPath>$(GameDir)\Muck_Data\Managed\Mono.Security.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>$(GameDir)\Muck_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="CommonFly">
