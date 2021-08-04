@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-    <ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="creative-windows" />
     <EmbeddedResource Include="creative-linux" />
     <EmbeddedResource Include="creative-osx" />
