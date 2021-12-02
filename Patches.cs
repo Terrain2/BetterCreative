@@ -148,9 +148,9 @@ namespace BetterCreative
             if (GameManager.gameSettings.gameMode == GameSettings.GameMode.Creative)
             {
                 __result = -1;
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         [HarmonyPatch(typeof(Hotbar), nameof(Hotbar.UseItem)), HarmonyPrefix]
