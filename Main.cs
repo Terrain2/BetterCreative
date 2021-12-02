@@ -19,7 +19,7 @@ namespace BetterCreative
             Name = "BetterCreative",
             Author = "Terrain",
             Guid = Author + "." + Name,
-            Version = "1.2.0.0";
+            Version = "1.2.1.0";
 
         internal readonly ManualLogSource log;
         internal readonly Harmony harmony;
